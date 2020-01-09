@@ -167,10 +167,10 @@ t[#t + 1] =
 			end,
             OnCommand = function(self)
                 SCREENMAN:GetTopScreen():AddInputCallback(input)
-				self:zoom(0):bounceend(0.35):zoom(1)
+				self:zoom(0):bounceend(0.2):zoom(1)
 			end,
 			OffCommand = function(self)
-				self:bouncebegin(0.35):zoom(0)
+				self:bouncebegin(0.2):zoom(0)
 			end,
 			PlayerJoinedMessageCommand = function(self, param)
 				if param.Player == PLAYER_1 then
