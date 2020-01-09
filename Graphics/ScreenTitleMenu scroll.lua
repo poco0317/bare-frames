@@ -4,10 +4,10 @@ return Def.ActorFrame {
 		{
 			Text = THEME:GetString("ScreenTitleMenu", gc:GetText()),
 			GainFocusCommand = function(self)
-				self:zoom(0.57)
+				self:zoom(1)
 			end,
 			LoseFocusCommand = function(self)
-				self:zoom(0.55)
+				self:zoom(0.3)
 			end
 		}
 }
