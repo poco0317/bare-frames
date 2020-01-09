@@ -2,7 +2,9 @@ local gc = Var("GameCommand")
 return Def.ActorFrame {
 	LoadFont("Common Normal") ..
 		{
-			Text = THEME:GetString("ScreenTitleMenu", gc:GetText()),
+			OnCommand = function(self)
+				self:settext(THEME:GetString(SCREENMAN:GetTopScreen():GetName(), gc:GetText()))
+			end,
 			GainFocusCommand = function(self)
 				self:zoom(1)
 			end,
