@@ -2,12 +2,10 @@ return Def.ActorFrame {
 	Def.Quad {
 		Name = "Horizontal",
 		InitCommand = function(self)
-			self:xy(0, -2):zoomto(380, 14):halign(0)
+			self:xy(8, -2):zoomto(3, 3):halign(0)
 		end,
 		SetCommand = function(self)
-			self:diffuseramp()
-			self:effectcolor1(color("#FFFFFF33"))
-			self:effectcolor2(color("#FFFFFF33"))
+			self:diffuse(color("#FFFFFF"))
 		end,
 		BeginCommand = function(self)
 			self:queuecommand("Set")
