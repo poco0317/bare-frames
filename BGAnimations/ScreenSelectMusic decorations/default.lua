@@ -2,6 +2,7 @@ local t = Def.ActorFrame {}
 
 t[#t+1] = LoadActor("profile")
 t[#t+1] = LoadActor("songinfo")
+t[#t+1] = LoadActor("search")
 
 local wheelX = 15
 local arbitraryWheelXThing = 17
