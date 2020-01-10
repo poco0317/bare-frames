@@ -4,6 +4,35 @@ t[#t+1] = LoadActor("profile")
 t[#t+1] = LoadActor("songinfo")
 t[#t+1] = LoadActor("search")
 
+
+local function randomInputter(event)
+	if event.type == "InputEventType_FirstPress" then
+		if event.DeviceInput.button == "DeviceButton_5" then
+			local ctrl = INPUTFILTER:IsControlPressed()
+			local song = GAMESTATE:GetCurrentSong()
+			local w = SCREENMAN:GetTopScreen():GetMusicWheel()
+			local t = {}
+			if ctrl and song and song:GetGroupName() then
+				t = w:GetSongsInGroup(song:GetGroupName())
+			else
+				t = w:GetSongs()
+			end
+			if #t > 0 then
+				w:SelectSong(t[math.random(#t)])
+			end
+		end
+	end
+end
+
+t[#t+1] = Def.ActorFrame {
+	OnCommand = function(self)
+		SCREENMAN:GetTopScreen():AddInputCallback(randomInputter)
+	end
+}
+
+
+
+
 local wheelX = 15
 local arbitraryWheelXThing = 17
 local space = 20
