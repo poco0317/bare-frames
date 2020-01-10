@@ -16,7 +16,7 @@ local function makeSSes()
                 self:halign(0)
             end,
             CurrentStepsP1ChangedMessageCommand = function(self)
-                if not steps then
+                if not steps or not meter[i] then
                     self:settextf("%s:", ms.SkillSetsTranslated[i])
                 else
                     self:settextf("%s: %5.2f", ms.SkillSetsTranslated[i], meter[i])
