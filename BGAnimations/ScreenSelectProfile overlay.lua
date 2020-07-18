@@ -1,3 +1,7 @@
+-- Controls the topmost layer of ScreenSelectProfile
+-- all of this basically allows for selecting a profile while still supporting players joining
+-- but player joining is obsoleted so a lot of this code can be simplified
+
 local translated_info = {
 	Title = "Select Profile",
 	SongPlayed = "Song Played",
@@ -144,15 +148,6 @@ t[#t + 1] =
     OnCommand = function(self)
         SCREENMAN:GetTopScreen():SetProfileIndex(PLAYER_1, 0)
     end,
-	StorageDevicesChangedMessageCommand = function(self, params)
-		self:queuecommand("UpdateInternal2")
-	end,
-	PlayerJoinedMessageCommand = function(self, params)
-		self:queuecommand("UpdateInternal2")
-	end,
-	PlayerUnjoinedMessageCommand = function(self, params)
-		self:queuecommand("UpdateInternal2")
-	end,
 	OnCommand = function(self, params)
 		self:queuecommand("UpdateInternal2")
 	end,

@@ -1,4 +1,5 @@
 local t = Def.ActorFrame {}
+-- Controls the song info relevant children of the ScreenSelectMusic decorations actorframe
 
 local wheelX = 15
 local arbitraryWheelXThing = 17
@@ -8,6 +9,7 @@ meter[1] = 0
 local steps
 local song
 
+-- functionally make skillset rating text to save space
 local function makeSSes()
     local ss = Def.ActorFrame {}
     local function makeSS(i)
@@ -39,9 +41,7 @@ t[#t+1] = Def.ActorFrame {
         self:x(wheelX + arbitraryWheelXThing + space + capWideScale(get43size(365),365)-50)
         self:y(20)
     end,
-    CurrentStepsP1ChangedMessageCommand = function(self)
-        steps = GAMESTATE:GetCurrentSteps()
-        song = GAMESTATE:GetCurrentSong()
+    SetMeterCommand = function(self)
         if steps then
             meter = {}
             for i = 1, #ms.SkillSets do
@@ -49,6 +49,15 @@ t[#t+1] = Def.ActorFrame {
                 meter[i] = m
             end
         end
+    end,
+    CurrentStepsP1ChangedMessageCommand = function(self)
+        steps = GAMESTATE:GetCurrentSteps()
+        song = GAMESTATE:GetCurrentSong()
+        self:playcommand("SetMeter")
+        self:playcommand("SetStuff")
+    end,
+    CurrentRateChangedMessageCommand = function(self)
+        self:playcommand("SetMeter")
         self:playcommand("SetStuff")
     end,
 
@@ -84,7 +93,22 @@ t[#t+1] = Def.ActorFrame {
             self:xy(songinfoLine, 20):zoom(.3)
             self:settext("BPM:"):halign(1)
         end
-    }
+    },
+
+	LoadFont("Common Normal") .. {
+        Name = "RateDisplay",
+		InitCommand = function(self)
+			self:xy(songinfoLine, 30):zoom(0.3)
+		end,
+		CurrentStepsP1ChangedMessageCommand = function(self)
+			self:settext(getCurRateDisplayString())
+		end,
+        CodeMessageCommand = function(self, params)
+			local rate = getCurRateValue()
+			ChangeMusicRate(rate, params)
+			self:settext(getCurRateDisplayString())
+		end
+	}
     
 }
 
